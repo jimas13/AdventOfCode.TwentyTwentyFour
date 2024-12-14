@@ -11,17 +11,15 @@
             string directory = Directory.GetCurrentDirectory();
             string path = Directory.GetFiles(directory).Where(name => name.Contains("NumbersInput.txt")).FirstOrDefault() ?? "";
             //string path = "./NumbersInput.txt";
-            using (StreamReader sr = new StreamReader(path))
+            using var sr = new StreamReader(path);
+            string line;
+            while ((line = sr.ReadLine()) != null)
             {
-                string line;
-                while ((line = sr.ReadLine()) != null)
+                var temp = line.ToString().Split("   ");
+                if (temp.Length > 0)
                 {
-                    var temp = line.ToString().Split("   ");
-                    if (temp.Length > 0)
-                    {
-                        leftArray.Add(int.Parse(temp[0]));
-                        rightArray.Add(int.Parse(temp[1]));
-                    }
+                    leftArray.Add(int.Parse(temp[0]));
+                    rightArray.Add(int.Parse(temp[1]));
                 }
             }
             //Console.WriteLine(reader.ReadToEnd());
